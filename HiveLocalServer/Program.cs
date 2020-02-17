@@ -28,7 +28,7 @@ namespace HiveLocalServer
             {
                 { "worker/api", HiveAPI }
             };
-
+            MacMapper();
             API.Start(80, Endpoints, 200);
             new Thread(DisplayStats) { IsBackground = true }.Start();
         }
@@ -38,14 +38,14 @@ namespace HiveLocalServer
             string Mac = "";
             for (int i = 0; i < Input.Length; i++)
             {
-                if(Input.Length - i > 16)
-                if (char.IsLetterOrDigit(Input[i]) && char.IsLetterOrDigit(Input[i + 1]) && Input[i + 2] == ':' || Input[i + 2] == '-')
-                    if (char.IsLetterOrDigit(Input[i + 3]) && char.IsLetterOrDigit(Input[i + 4]) && Input[i + 5] == ':' || Input[i + 5] == '-')
-                        if (char.IsLetterOrDigit(Input[i + 6]) && char.IsLetterOrDigit(Input[i + 7]) && Input[i + 8] == ':' || Input[i + 8] == '-')
-                            if (char.IsLetterOrDigit(Input[i + 9]) && char.IsLetterOrDigit(Input[i + 10]) && Input[i + 11] == ':' || Input[i + 11] == '-')
-                                if (char.IsLetterOrDigit(Input[i + 12]) && char.IsLetterOrDigit(Input[i + 13]) && Input[i + 14] == ':' || Input[i + 14] == '-')
-                                    if (char.IsLetterOrDigit(Input[i + 15]) && char.IsLetterOrDigit(Input[i + 16]))
-                                        Mac = Input.Substring(i, i + 16);
+                if (Input.Length - i > 16)
+                    if (char.IsLetterOrDigit(Input[i]) && char.IsLetterOrDigit(Input[i + 1]) && Input[i + 2] == ':' || Input[i + 2] == '-')
+                        if (char.IsLetterOrDigit(Input[i + 3]) && char.IsLetterOrDigit(Input[i + 4]) && Input[i + 5] == ':' || Input[i + 5] == '-')
+                            if (char.IsLetterOrDigit(Input[i + 6]) && char.IsLetterOrDigit(Input[i + 7]) && Input[i + 8] == ':' || Input[i + 8] == '-')
+                                if (char.IsLetterOrDigit(Input[i + 9]) && char.IsLetterOrDigit(Input[i + 10]) && Input[i + 11] == ':' || Input[i + 11] == '-')
+                                    if (char.IsLetterOrDigit(Input[i + 12]) && char.IsLetterOrDigit(Input[i + 13]) && Input[i + 14] == ':' || Input[i + 14] == '-')
+                                        if (char.IsLetterOrDigit(Input[i + 15]) && char.IsLetterOrDigit(Input[i + 16]))
+                                            Mac = Input.Substring(i, 17);
 
             }
             return Mac;
@@ -80,12 +80,12 @@ namespace HiveLocalServer
                             if (Device.Contains("Hello"))
                                 Console.ForegroundColor = ConsoleColor.Yellow;
                             else
-                                if(Device.Contains("*"))
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    else
-                                    Console.ForegroundColor = ConsoleColor.Gray;
+                                if (Device.Contains("*"))
+                                Console.ForegroundColor = ConsoleColor.Red;
+                            else
+                                Console.ForegroundColor = ConsoleColor.Gray;
 
-                            Console.WriteLine(Device.Replace("*",""));
+                            Console.WriteLine(Device.Replace("*", ""));
                         }
                     }
                     catch { }
@@ -256,7 +256,7 @@ namespace HiveLocalServer
 
         public string Format(string Text)
         {
-            return Text.Replace("\r","").Replace("\n", "\\n").Replace("\"", "\\\"");
+            return Text.Replace("\r", "").Replace("\n", "\\n").Replace("\"", "\\\"");
         }
 
         public string GetBetween(string strSource, string strStart, string strEnd)
@@ -310,7 +310,7 @@ namespace HiveLocalServer
                 if (IsDirectory(Path) == true && System.IO.Directory.Exists(PathCheck.ToString()) == true) { return true; }
                 if (IsDirectory(Path) == false && System.IO.File.Exists(PathCheck.ToString()) == true) { return true; }
             }
-            catch{ }
+            catch { }
             return false;
         }
         public bool IsDirectory(string Path)
